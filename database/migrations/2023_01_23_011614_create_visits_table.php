@@ -15,6 +15,9 @@ class CreateVisitsTable extends Migration
     {
         Schema::create('visits', function (Blueprint $table) {
             $table->id();
+            $table->string('country');
+
+            $table->foreignId('short_link_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

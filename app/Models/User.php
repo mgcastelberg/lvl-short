@@ -58,4 +58,9 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    /** Relacion Uno a Muchos */
+    public function shortLinks(){
+        return $this->hasMany(ShortLink::class);
+    }
 }
