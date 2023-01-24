@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateShortLinksTable extends Migration
+class CreateMocksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateShortLinksTable extends Migration
      */
     public function up()
     {
-        Schema::create('short_links', function (Blueprint $table) {
+        Schema::create('mocks', function (Blueprint $table) {
             $table->id();
             $table->string('url');
-            $table->string('title')->nullable();
+            $table->string('title');
+            $table->string('project_name');
             $table->string('slug');
 
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
@@ -31,6 +32,6 @@ class CreateShortLinksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('short_links');
+        Schema::dropIfExists('mocks');
     }
 }
