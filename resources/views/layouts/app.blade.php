@@ -12,18 +12,18 @@
 
         <!-- Styles -->
         @livewireStyles
-
         <!-- Scripts -->
         {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
+        {{-- font awesome --}}
+        <script src="https://kit.fontawesome.com/08cc16a3b6.js" crossorigin="anonymous"></script>
 
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased text-gray-700">
         <x-jet-banner />
 
         <div class="min-h-screen bg-gray-100">

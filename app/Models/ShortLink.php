@@ -17,7 +17,7 @@ class ShortLink extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function visits(): HasMany
+    public function visits()
     {
         return $this->hasMany(Visit::class);
     }

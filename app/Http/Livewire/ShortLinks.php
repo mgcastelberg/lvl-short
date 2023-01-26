@@ -11,8 +11,14 @@ class ShortLinks extends Component
 {
 
     public $url;
+    public $shortsLinks;
 
     protected $listeners = ['shortLinkCreada' => 'findTitle'];
+
+    public function mount(){
+        // $this->shortsLinks = auth()->user()->shortLinks;
+        $this->shortsLinks = auth()->user()->shortLinks()->latest()->get();
+    }
 
     public function procesarUrl(){
 
