@@ -12,12 +12,21 @@ class ShortLinks extends Component
 
     public $url;
     public $shortsLinks;
+    public $currentShortLink;
 
     protected $listeners = ['shortLinkCreada' => 'findTitle'];
 
     public function mount(){
+        $this->getShortLinks();
+    }
+
+    public function getShortLinks(){
         // $this->shortsLinks = auth()->user()->shortLinks;
         $this->shortsLinks = auth()->user()->shortLinks()->latest()->get();
+
+        if (!$this->currentShortLink) {
+            $this->currentShortLink = $this->shortsLinks->first();
+        }
     }
 
     public function procesarUrl(){
@@ -36,6 +45,8 @@ class ShortLinks extends Component
             'slug' => Str::random(6),
             'user_id' => auth()->id()
         ]);
+
+        $this->getShortLinks();
 
         $this->emit('shortLinkCreada',$sLink->id);
 
@@ -56,6 +67,10 @@ class ShortLinks extends Component
         } catch (Exception $e) {
             //throw $th;
         }
+    }
+
+    public function changeShortLink($shortLinkId){
+        $this->currentShortLink = ShortLink::find($shortLinkId);
     }
 
     public function render()
