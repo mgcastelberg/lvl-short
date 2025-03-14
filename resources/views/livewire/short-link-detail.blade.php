@@ -32,8 +32,6 @@
             }
         }">
 
-        {{-- <h2 class="text-xl font-semibold ">{{ $shortLink->title }}</h2> --}}
-
         <div class="flex items-center justify-between ">
             <a class="font-semibold text-orange-700 " target="_blank" href="{{ route('shortlink.show', $shortLink->slug) }}">
                 {{ route('shortlink.show', $shortLink->slug) }}

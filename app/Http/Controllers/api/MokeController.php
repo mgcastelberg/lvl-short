@@ -10,7 +10,9 @@ class MokeController extends Controller
 {
     public function index(){
 
-        $data = file_get_contents(storage_path('app/public/mock/').'getDemographicDataOK.json');
+        // $data = file_get_contents(storage_path('app/public/mock/').'getDemographicDataOK.json');
+        // $data = file_get_contents(storage_path('app/public/mock/').'getRankReached.json');
+        $data = file_get_contents(storage_path('app/public/mock/').'countriesApiPortal.json');
         $products = json_decode($data, true);
 
         return response()->json($products, 200);

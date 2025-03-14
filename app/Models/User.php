@@ -66,6 +66,10 @@ class User extends Authenticatable
         return $this->hasMany(ShortLink::class);
     }
 
+    public function manualLinks(){
+        return $this->hasMany(ManualLink::class);
+    }
+
     public function mock(){
         return $this->hasMany(Mock::class);
     }

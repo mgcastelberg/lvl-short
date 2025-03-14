@@ -4,28 +4,27 @@ namespace App\Http\Livewire;
 
 use Exception;
 use Livewire\Component;
-use App\Models\ShortLink;
+use App\Models\ManualLink;
 use Illuminate\Support\Str;
 
-class ShortLinks extends Component
+class ManualLinks extends Component
 {
-
     public $url;
-    public $shortsLinks;
+    public $manualsLinks;
     public $currentShortLink;
 
-    // protected $listeners = ['shortLinkCreada' => 'findTitle'];
+    protected $listeners = ['shortLinkCreada' => 'findTitle'];
 
     public function mount(){
         $this->getShortLinks();
     }
 
     public function getShortLinks(){
-        // $this->shortsLinks = auth()->user()->shortLinks;
-        $this->shortsLinks = auth()->user()->shortLinks()->latest()->get();
+        // $this->manualsLinks = auth()->user()->shortLinks;
+        $this->manualsLinks = auth()->user()->manualLinks()->latest()->get();
 
         if (!$this->currentShortLink) {
-            $this->currentShortLink = $this->shortsLinks->first();
+            $this->currentShortLink = $this->manualsLinks->first();
         }
     }
 
@@ -39,7 +38,7 @@ class ShortLinks extends Component
             $this->url = "http://" . $this->url;
         }
 
-        $sLink = ShortLink::create([
+        $sLink = ManualLink::create([
             'url' => $this->url,
             'title' => $this->url,
             'slug' => Str::random(6),
@@ -54,27 +53,27 @@ class ShortLinks extends Component
 
     }
 
-    // public function findTitle(ShortLink $sLink)
-    // {
-    //     try {
-    //         $contents = file_get_contents($sLink->url);
-    //         if (preg_match('/<title>(.*)<\/title>/', $contents, $matches)) {
-    //             $title = $matches[1];
-    //         }
-    //         $sLink->update([
-    //             'title' => $title
-    //         ]);
-    //     } catch (Exception $e) {
-    //         //throw $th;
-    //     }
-    // }
+    public function findTitle(ManualLink $sLink)
+    {
+        try {
+            $contents = file_get_contents($sLink->url);
+            if (preg_match('/<title>(.*)<\/title>/', $contents, $matches)) {
+                $title = $matches[1];
+            }
+            $sLink->update([
+                'title' => $title
+            ]);
+        } catch (Exception $e) {
+            //throw $th;
+        }
+    }
 
     public function changeShortLink($shortLinkId){
-        $this->currentShortLink = ShortLink::find($shortLinkId);
+        $this->currentShortLink = ManualLink::find($shortLinkId);
     }
 
     public function render()
     {
-        return view('livewire.short-link');
+        return view('livewire.manual-link');
     }
 }

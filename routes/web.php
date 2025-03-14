@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ShortLinkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -25,8 +28,12 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+    Route::get('/manual', function () {
+        return view('manual');
+    })->name('qr_code');
+    Route::get('/mock', function () {
+        return view('mock');
+    })->name('mock');
 });
 
-Route::get('/{$shortLink}', function(){
-
-})->name('shortlink.show');
+Route::get('/{shortLink}', [ShortLinkController::class, 'index'])->name('shortlink.show');

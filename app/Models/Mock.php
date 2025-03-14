@@ -9,7 +9,7 @@ class Mock extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['url','title','project_name','slug'];
+    protected $fillable = ['url','title','project_name','slug','user_id'];
 
     /** relacion 1 a Muchos Inversa */
     public function user()

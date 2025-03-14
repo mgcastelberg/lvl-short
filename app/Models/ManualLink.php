@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ShortLink extends Model
+class ManualLink extends Model
 {
     use HasFactory;
 
@@ -17,14 +17,13 @@ class ShortLink extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function visits()
-    {
-        return $this->hasMany(Visit::class);
-    }
+    // public function visits()
+    // {
+    //     return $this->hasMany(Visit::class);
+    // }
 
     // Route Model Binding
     public function getRouteKeyName(){
         return 'slug';
     }
-
 }
